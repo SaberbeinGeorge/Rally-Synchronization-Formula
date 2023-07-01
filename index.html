@@ -7,25 +7,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>>
   <script>
-    // Definir la función que calcula el tiempo restante del conteo regresivo del mitin del equipo más lento cuando inicia el mitin el otro equipo
+    function compareNumbers(a, b) {
+      return b - a;
+    }
     function calcularC() {
 
-      let rally1 = Number(document.getElementById("rally1").value); //input 1
-      let rally2 = Number(document.getElementById("rally2").value); // input 2
-      let rally3 = Number(document.getElementById("rally3").value); // input 2
-      let interval = Number(document.getElementById("D").value); //interval between 1 and 2
-      let mitin = 5;
+      let rally1 = document.getElementById("rally1").value;
+      let rally2 = document.getElementById("rally2").value;
+      let rally3 = document.getElementById("rally3").value;
+      let interval = Number(document.getElementById("D").value);
+      let mitin = 5 * 60;
 
+      let rally1_split = rally1.split(":");
+      let rally1_sec = (Number(rally1_split[0]) * 60) + Number(rally1_split[1]);
 
-      let delta1 = ((rally1 - rally2) + (interval / 60)); // interval between 1 and 2 in minutes
-      let delta2 = ((rally1 - rally3) + ((interval / 60)*2)); // interval between 2 and 3 in minutes
+      let rally2_split = rally2.split(":");
+      let rally2_sec = (Number(rally2_split[0]) * 60) + Number(rally2_split[1]);
 
+      let rally3_split = rally3.split(":");
+      let rally3_sec = (Number(rally3_split[0]) * 60) + Number(rally3_split[1]);
 
-      
-      distance1 = "rally difference" + Math.floor(delta1) + " minutes and " + Math.floor((delta1 *60) % 60) + " seconds. start 2th rally at " + Math.floor(mitin - delta1) + " minutes and " + Math.floor(mitin -( (delta1 *60) % 60)) + " seconds ";
-      distance2 = "rally difference" + Math.floor(delta2) + " minutes and " + Math.floor((delta2 *60) % 60) + " seconds. start 2th rally at " + Math.floor(mitin - delta2) + " minutes and " + Math.floor(mitin -( (delta2 *60) % 60)) + " seconds ";
-      document.getElementById("resultado 1").innerHTML = distance1;
-      document.getElementById("resultado 2").innerHTML = distance2;
+      let num = [rally1_sec, rally2_sec, rally3_sec];
+      num = num.sort(compareNumbers);
+      console.log(num);
+
+      let C1 = (num[0] - num[1]) + (interval);
+      let C2 = (num[0] - num[2]) + (interval * 2);
+
+      let x1 = mitin - C1;
+      let x2 = mitin - C2;
+
+      let convert1_min = Math.floor(x1 / 60);
+      let convert2_min = Math.floor(x2 / 60);
+
+      let convert1_sec = Math.floor(x1 % 60);
+      let convert2_sec = Math.floor(x2 % 60);
+
+      console.log("rally 2 starts at " + convert1_min + " min " + convert1_sec + " sec ");
+      console.log("rally 3 starts at " + convert2_min + " min " + convert2_sec + " sec ");
     }
   </script>
 </head>
@@ -34,13 +53,13 @@
   <h1>Rally Timing Formula</h1>
   <p>Introduce los valores de las variables y pulsa el botón para ver el resultado.</p>
   <label for="rally1">marching speed of the first rally in minutes:</label>
-  <input type="number" id="rally1" name="rally1" value min="0" step=".1"><br>
+  <input type="string" id="rally1" name="rally1"><br>
   <!-- Añadir min y step para aceptar solo números enteros -->
   <label for="rally2">marching speed of the 2th rally in minutes:</label>
-  <input type="number" id="rally2" name="rally2" value min="0" step=".1"><br>
+  <input type="string" id="rally2" name="rally2"><br>
   <!-- Añadir min y step para aceptar solo números enteros -->
   <label for="rally3">marching speed of the 3th rally in minutes:</label>
-  <input type="number" id="rally3" name="rally3" value min="0" step=".1"><br>
+  <input type="string" id="rally3" name="rally3"><br>
   <!-- Añadir min y step para aceptar solo números enteros -->
   <label for="D">intervals between the rallies:</label>
   <input type="number" id="D" name="D" value min="0" step="1"><br>
