@@ -1,58 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>>
-        <script>
-        // Definir la función que calcula el tiempo restante del conteo regresivo del mitin del equipo más lento cuando inicia el mitin el otro equipo
-        function calcularC() {
-          // Obtener los valores de las variables de los inputs
-          let T = Number(document.getElementById("T").value); // Tiempo de marcha del equipo más lento en minutos
-          let t2 = Number(document.getElementById("t2").value); // Tiempo de marcha del otro equipo en minutos
-          let D = Number(document.getElementById("D").value); // Intervalo de tiempo deseado entre la llegada de cada mitin al objetivo en segundos
-            console.log(T,t2,D)
-            let mitin = 5;
-            console.log(mitin)
-          // Calcular el tiempo restante del conteo regresivo del mitin del equipo más lento cuando inicia el mitin el otro equipo
-          let C = (T - t2) + D; // Convertir el intervalo de segundos a minutos
-          let c2 = Number(C.toFixed(2));
-          let c3 = Number(c2)*100;
-          let minutos = mitin;
-        let segundos = c3;
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>>
+  <script>
+    // Definir la función que calcula el tiempo restante del conteo regresivo del mitin del equipo más lento cuando inicia el mitin el otro equipo
+    function calcularC() {
 
-// Convertir los minutos en segundos y restar los segundos
-        let totalSegundos = minutos * 60 - segundos;
-        console.log(totalSegundos)
-        // Convertir los segundos en minutos y segundos
-        let resultadoMinutos = Math.floor(totalSegundos / 60);
-        let resultadoSegundos = totalSegundos % 60;
+      let rally1 = Number(document.getElementById("rally1").value); //input 1
+      let rally2 = Number(document.getElementById("rally2").value); // input 2
+      let rally3 = Number(document.getElementById("rally3").value); // input 2
+      let interval = Number(document.getElementById("D").value); //interval between 1 and 2
+      let mitin = 5;
 
-          
-          // Convertir el resultado de minutos a segundos
-          let Cseg = C * 60;
-          
-          // Obtener los minutos y los segundos a partir de los segundos totales
-          let Cmin = Math.floor(Cseg / 60); // Usar la división entera para obtener los minutos
-          let mitinMin= Math.floor(mitin / 60);
-          ; // Usar el módulo para obtener los segundos
 
-          // Mostrar el resultado en el elemento con id "resultado"
-          document.getElementById("resultado").innerHTML = "El tiempo restante del conteo regresivo del mitin del equipo más lento cuando inicia el mitin el otro equipo es: " + Cmin + " minutos y " + C.toFixed(2) + " segundos." + "debes salir al min "+ resultadoMinutos + "y" +resultadoSegundos+ " segundos del primer regimento";
-        }
-        </script>
-        </head>
-        <body>
-        <h1>Rally Timing Formula</h1>
-        <p>Introduce los valores de las variables y pulsa el botón para ver el resultado.</p>
-        <label for="T">Tiempo de marcha del equipo más lento en minutos:</label>
-        <input type="number" id="T" name="T" value min="0" step="1"><br> <!-- Añadir min y step para aceptar solo números enteros -->
-        <label for="t2">Tiempo de marcha del otro equipo en minutos:</label>
-        <input type="number" id="t2" name="t2" value min="0" step="1"><br> <!-- Añadir min y step para aceptar solo números enteros -->
-        <label for="D">Intervalo de tiempo deseado entre la llegada de cada mitin al objetivo en segundos:</label>
-        <input type="number" id="D" name="D" value min="0" step="1"><br> <!-- Añadir min y step para aceptar solo números enteros -->
-        <button onclick="calcularC()">Calcular</button>
-        <p id="resultado"></p>
-        </body>
+      let delta1 = ((rally1 - rally2) + (interval / 60)); // interval between 1 and 2 in minutes
+      let delta2 = ((rally1 - rally3) + ((interval / 60)*2)); // interval between 2 and 3 in minutes
+
+
+      
+      distance1 = "rally difference" + Math.floor(delta1) + " minutes and " + Math.floor((delta1 *60) % 60) + " seconds. start 2th rally at " + Math.floor(mitin - delta1) + " minutes and " + Math.floor(mitin -( (delta1 *60) % 60)) + " seconds ";
+      distance2 = "rally difference" + Math.floor(delta2) + " minutes and " + Math.floor((delta2 *60) % 60) + " seconds. start 2th rally at " + Math.floor(mitin - delta2) + " minutes and " + Math.floor(mitin -( (delta2 *60) % 60)) + " seconds ";
+      document.getElementById("resultado 1").innerHTML = distance1;
+      document.getElementById("resultado 2").innerHTML = distance2;
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Rally Timing Formula</h1>
+  <p>Introduce los valores de las variables y pulsa el botón para ver el resultado.</p>
+  <label for="rally1">marching speed of the first rally in minutes:</label>
+  <input type="number" id="rally1" name="rally1" value min="0" step=".1"><br>
+  <!-- Añadir min y step para aceptar solo números enteros -->
+  <label for="rally2">marching speed of the 2th rally in minutes:</label>
+  <input type="number" id="rally2" name="rally2" value min="0" step=".1"><br>
+  <!-- Añadir min y step para aceptar solo números enteros -->
+  <label for="rally3">marching speed of the 3th rally in minutes:</label>
+  <input type="number" id="rally3" name="rally3" value min="0" step=".1"><br>
+  <!-- Añadir min y step para aceptar solo números enteros -->
+  <label for="D">intervals between the rallies:</label>
+  <input type="number" id="D" name="D" value min="0" step="1"><br>
+  <!-- Añadir min y step para aceptar solo números enteros -->
+  <button onclick="calcularC()">Calcular</button>
+  <p id="resultado 1"></p>
+  <p id="resultado 2"></p>
+</body>
+
 </html>
