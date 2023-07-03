@@ -6,50 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>>
-  <script>
-    function compareNumbers(a, b) {
-      return b - a;
-    }
-    function calcularC() {
-
-      let rally1 = document.getElementById("rally1").value;
-      let rally2 = document.getElementById("rally2").value;
-      let rally3 = document.getElementById("rally3").value;
-      let interval = Number(document.getElementById("D").value);
-      let mitin = 5 * 60;
-
-      let rally1_split = rally1.split(":");
-      let rally1_sec = (Number(rally1_split[0]) * 60) + Number(rally1_split[1]);
-
-      let rally2_split = rally2.split(":");
-      let rally2_sec = (Number(rally2_split[0]) * 60) + Number(rally2_split[1]);
-
-      let rally3_split = rally3.split(":");
-      let rally3_sec = (Number(rally3_split[0]) * 60) + Number(rally3_split[1]);
-
-      let num = [rally1_sec, rally2_sec, rally3_sec];
-      num = num.sort(compareNumbers);
-      console.log(num);
-
-      let C1 = (num[0] - num[1]) + (interval);
-      let C2 = (num[0] - num[2]) + (interval * 2);
-
-      let x1 = mitin - C1;
-      let x2 = mitin - C2;
-
-      let convert1_min = Math.floor(x1 / 60);
-      let convert2_min = Math.floor(x2 / 60);
-
-      let convert1_sec = Math.floor(x1 % 60);
-      let convert2_sec = Math.floor(x2 % 60);
-
-      console.log("rally 2 starts at " + convert1_min + " min " + convert1_sec + " sec ");
-      console.log("rally 3 starts at " + convert2_min + " min " + convert2_sec + " sec ");
-    }
-  </script>
+  
 </head>
 
 <body>
+  <script src="index.js"></script>
   <h1>Rally Timing Formula</h1>
   <p>Introduce los valores de las variables y pulsa el botón para ver el resultado.</p>
   <label for="rally1">marching speed of the first rally in minutes:</label>
@@ -63,6 +24,23 @@
   <!-- Añadir min y step para aceptar solo números enteros -->
   <label for="D">intervals between the rallies:</label>
   <input type="number" id="D" name="D" value min="0" step="1"><br>
+
+  <p>rally time</p>
+  <label>
+    <input type="checkbox" id="checkbox1" onclick="handleCheckbox(1)">
+    5 min.
+  </label>
+
+  <label>
+    <input type="checkbox" id="checkbox2" onclick="handleCheckbox(2)">
+    15 min.
+  </label>
+
+  <label>
+    <input type="checkbox" id="checkbox3" onclick="handleCheckbox(3)">
+    30 min.
+  </label>
+  <br>
   <!-- Añadir min y step para aceptar solo números enteros -->
   <button onclick="calcularC()">Calcular</button>
   <p id="resultado 1"></p>
