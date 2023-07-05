@@ -6,24 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>>
-  
+
 </head>
 
 <body>
-  <script src="index.js"></script>
+  <script src="js/script.js"></script>
   <h1>Rally Timing Formula</h1>
   <p>Introduce los valores de las variables y pulsa el botón para ver el resultado.</p>
-  <label for="rally1">marching speed of the first rally in minutes:</label>
-  <input type="string" id="rally1" name="rally1"><br>
+  <label for="rally1">marching speed of person "A"</label>
+  <input type="string" id="rally1" name="rally1" placeholder="min:sec"><br>
   <!-- Añadir min y step para aceptar solo números enteros -->
-  <label for="rally2">marching speed of the 2th rally in minutes:</label>
-  <input type="string" id="rally2" name="rally2"><br>
+  <label for="rally2">marching speed of person "B"</label>
+  <input type="string" id="rally2" name="rally2" placeholder="min:sec"><br>
   <!-- Añadir min y step para aceptar solo números enteros -->
-  <label for="rally3">marching speed of the 3th rally in minutes:</label>
-  <input type="string" id="rally3" name="rally3"><br>
+  <label for="rally3">marching speed of person "C"</label>
+  <input type="string" id="rally3" name="rally3" placeholder="min:sec"><br>
   <!-- Añadir min y step para aceptar solo números enteros -->
-  <label for="D">intervals between the rallies:</label>
-  <input type="number" id="D" name="D" value min="0" step="1"><br>
+  <label for="D">intervals between the rallies in seconds:</label>
+  <input type="number" id="D" name="D" value min="0" step="1" placeholder="sec"><br>
 
   <p>rally time</p>
   <label>
@@ -43,8 +43,9 @@
   <br>
   <!-- Añadir min y step para aceptar solo números enteros -->
   <button onclick="calcularC()">Calcular</button>
-  <p id="resultado 1"></p>
-  <p id="resultado 2"></p>
+  <p id="march 1"></p>
+  <p id="march 2"></p>
+  <p id="march 3"></p>
 </body>
 
 </html>
