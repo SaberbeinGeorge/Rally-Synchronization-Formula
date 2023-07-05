@@ -15,7 +15,7 @@ function handleCheckbox(checkboxId) {
   }
 
   // Output a certain value based on the selected checkbox
-  
+
   if (document.getElementById(`checkbox${checkboxId}`).checked) {
     if (checkboxId === 1) {
       output = '5';
@@ -25,18 +25,17 @@ function handleCheckbox(checkboxId) {
       output = '30';
     }
   }
-  console.log(output); // Modify this line to display the output in your desired way
+
 }
 function compareNumbers(a, b) {
   return b - a;
 }
 function calcularC() {
-
   let rally1 = document.getElementById("rally1").value;
   let rally2 = document.getElementById("rally2").value;
   let rally3 = document.getElementById("rally3").value;
   let interval = Number(document.getElementById("D").value);
-  let mitin = Number(output) * 60 ;
+  let mitin = Number(output) * 60;
 
   let rally1_split = rally1.split(":");
   let rally1_sec = (Number(rally1_split[0]) * 60) + Number(rally1_split[1]);
@@ -47,22 +46,85 @@ function calcularC() {
   let rally3_split = rally3.split(":");
   let rally3_sec = (Number(rally3_split[0]) * 60) + Number(rally3_split[1]);
 
+  var rallys = {
+    rally1: {
+      name: "A",
+      origin: rally1,
+      distance: rally1_sec,
+
+    },
+    rally2: {
+      name: "B",
+      origin: rally2,
+      distance: rally2_sec,
+
+    },
+    rally3: {
+      name: "C",
+      origin: rally3,
+      distance: rally3_sec,
+    }
+  }
+
   let num = [rally1_sec, rally2_sec, rally3_sec];
   num = num.sort(compareNumbers);
-  console.log(num);
+  rallys = checkfor(rallys, num);
 
-  let C1 = (num[0] - num[1]) + (interval);
-  let C2 = (num[0] - num[2]) + (interval * 2);
 
-  let x1 = mitin - C1;
-  let x2 = mitin - C2;
 
-  let convert1_min = Math.floor(x1 / 60);
-  let convert2_min = Math.floor(x2 / 60);
+  printresult(rallys);
+  function checkfor(rallys, num) {
+    // if(num.length == 3){
+    let C1 = mitin - (num[0] - num[1]) + (interval);
+    let C2 = mitin - (num[0] - num[2]) + (interval * 2);
+    let convert1_min = Math.floor(C1 / 60);
+    let convert2_min = Math.floor(C2 / 60);
 
-  let convert1_sec = Math.floor(x1 % 60);
-  let convert2_sec = Math.floor(x2 % 60);
+    let convert1_sec = Math.floor(C1 % 60);
+    let convert2_sec = Math.floor(C2 % 60);
+    Object.keys(rallys).forEach((i) => {
+      if (num[0] == rallys[i].distance) {
+        rallys[i].queue = "1";
+        rallys[i].start_min = mitin / 60;
+        rallys[i].start_sec = mitin % 60;
 
-  console.log("rally 2 starts at " + convert1_min + " min " + convert1_sec + " sec ");
-  console.log("rally 3 starts at " + convert2_min + " min " + convert2_sec + " sec ");
+
+      } else if (num[1] == rallys[i].distance) {
+        rallys[i].queue = "2";
+        rallys[i].start_min = convert1_min;
+        rallys[i].start_sec = convert1_sec;
+
+      } else {
+        rallys[i].queue = "3";
+        rallys[i].start_min = convert2_min;
+        rallys[i].start_sec = convert2_sec;
+      }
+    });
+    return rallys;
+    // }
+
+
+
+
+
+
+
+
+  }
+}
+
+
+function printresult(obj) {
+  Object.keys(obj).forEach((i) => {
+
+    if (obj[i].queue == 1) {
+      let text = "march " + obj[i].name + " will start the first rally";
+      document.getElementById("march " + obj[i].queue).innerHTML = text;
+    } else {
+      let text = "march " + obj[i].name + " will start at " + obj[i].start_min + " minutes and " + obj[i].start_sec + " seconds of the first rally"
+      document.getElementById("march " + obj[i].queue).innerHTML = text;
+    }
+
+  }
+  );
 }
