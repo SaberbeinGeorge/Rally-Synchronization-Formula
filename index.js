@@ -30,6 +30,18 @@ function handleCheckbox(checkboxId) {
 function compareNumbers(a, b) {
   return b - a;
 }
+function separate(a){
+  var sec;
+
+  if(a.indexOf(':') == -1){
+    sec = Number(a);
+  }else{
+    let split =  a.split(":");
+    sec = (Number(split[0]) * 60) + Number(split[1]);
+  }
+  
+  return sec;
+}
 function calcularC() {
   let rally1 = document.getElementById("rally1").value;
   let rally2 = document.getElementById("rally2").value;
@@ -37,14 +49,14 @@ function calcularC() {
   let interval = Number(document.getElementById("D").value);
   let mitin = Number(output) * 60;
 
-  let rally1_split = rally1.split(":");
-  let rally1_sec = (Number(rally1_split[0]) * 60) + Number(rally1_split[1]);
 
-  let rally2_split = rally2.split(":");
-  let rally2_sec = (Number(rally2_split[0]) * 60) + Number(rally2_split[1]);
 
-  let rally3_split = rally3.split(":");
-  let rally3_sec = (Number(rally3_split[0]) * 60) + Number(rally3_split[1]);
+  
+  let rally1_sec = separate(rally1);
+  
+  let rally2_sec = separate(rally2);
+
+  let rally3_sec = separate(rally3);
 
   var rallys = {
     rally1: {
