@@ -1,5 +1,15 @@
 let output = '5';
 
+let selectorDeForumula = false
+
+ function comprobadorDeTime() {
+  let cambioFormula = document.getElementById('cambioFormula');
+  if (cambioFormula.value === 'Líder de mitin con el menor tiempo de marcha') {
+    return selectorDeForumula = true;
+  } else {
+    return selectorDeForumula = false;
+  }
+}
 
 function handleCheckbox(checkboxId) {
   // Deactivate other checkboxes
@@ -86,9 +96,16 @@ function calcularC() {
 
   printresult(rallys);
   function checkfor(rallys, num) {
-    // if(num.length == 3){
-    let C1 = mitin - (num[0] - num[1]) + (interval);
-    let C2 = mitin - (num[0] - num[2]) + (interval * 2);
+
+    let C1, C2;
+    if (selectorDeForumula) {
+        C1 = mitin - (num[0] - num[1]) - (interval);
+        C2 = mitin - (num[0] - num[2]) - (interval * 2);
+    } else {
+        C1 = mitin - (num[0] - num[1]) + (interval);
+        C2 = mitin - (num[0] - num[2]) + (interval * 2);
+    }
+    
     let convert1_min = Math.floor(C1 / 60);
     let convert2_min = Math.floor(C2 / 60);
 
@@ -114,14 +131,6 @@ function calcularC() {
     });
     return rallys;
     // }
-
-
-
-
-
-
-
-
   }
 }
 
